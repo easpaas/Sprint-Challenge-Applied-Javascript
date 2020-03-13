@@ -59,7 +59,6 @@ function createCard(data) {
     author.append(name);
   // end of author child elements
 
-  // TODO append elements here
   card.append(author);
 
   return card;
@@ -70,6 +69,7 @@ function createCard(data) {
 axios.get('https://lambda-times-backend.herokuapp.com/articles')
   .then(response => {
     const articleObject = response.data.articles;
+    console.log(Object.keys(articleObject))
 
     // variable for each topic
     const javaScript = articleObject.javascript;
@@ -78,8 +78,7 @@ axios.get('https://lambda-times-backend.herokuapp.com/articles')
     const jquery = articleObject.jquery;
     const node = articleObject.node;
 
-    // TODO -time permitting - create a function that accepts the topic as an argument and loops through creating a card 
-
+    // loop through each topic and create a card for each article
     javaScript.forEach(article => {
       container.append(createCard(article));
     })
