@@ -69,31 +69,12 @@ function createCard(data) {
 axios.get('https://lambda-times-backend.herokuapp.com/articles')
   .then(response => {
     const articleObject = response.data.articles;
-    console.log(Object.keys(articleObject))
 
-    // variable for each topic
-    const javaScript = articleObject.javascript;
-    const bootstrap = articleObject.bootstrap;
-    const technology = articleObject.technology;
-    const jquery = articleObject.jquery;
-    const node = articleObject.node;
-
-    // loop through each topic and create a card for each article
-    javaScript.forEach(article => {
-      container.append(createCard(article));
-    })
-    bootstrap.forEach(article => {
-      container.append(createCard(article));
-    })
-    technology.forEach(article => {
-      container.append(createCard(article));
-    })
-    jquery.forEach(article => {
-      container.append(createCard(article));
-    })
-    node.forEach(article => {
-      container.append(createCard(article));
-    })
+    for (const article in articleObject) {
+      articleObject[article].forEach(item => {
+        container.append(createCard(item));
+      })
+    }
   })
   .catch(error => {
     console.log(error);
